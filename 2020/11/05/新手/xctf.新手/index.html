@@ -7,14 +7,14 @@
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>我的第一篇博客文章 - 杨咩咩</title>
+  <title> - 杨咩咩</title>
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="google" content="notranslate" />
 
   
   
-  <meta name="description" content="dfs"> 
+  <meta name="description" content="1.view_source查看网页源代码有三种方法： ..."> 
   
   <meta name="author" content="tremiy"> 
 
@@ -105,17 +105,6 @@
   
 
 
-<nav class="navbar">
-  <div class="left"></div>
-  <div class="center">我的第一篇博客文章</div>
-  <div class="right">
-    
-      <i class="iconfont iconmoono" id="color-toggle" color-toggle="light"></i>
-    
-    <i class="iconfont iconmenu j-navbar-menu"></i>
-  </div>
-</nav>
-
   <nav class="menu">
   <div class="menu-wrap">
     <div class="menu-close">
@@ -164,25 +153,55 @@
     <section class="head">
   <img   class="lazyload" data-original="/images/theme/post-image.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  draggable="false">
   <div class="head-mask">
-    <h1 class="head-title">我的第一篇博客文章</h1>
+    <h1 class="head-title"></h1>
     <div class="head-info">
-      <span class="post-info-item"><i class="iconfont iconcalendar"></i>October 24, 2020</span
+      <span class="post-info-item"><i class="iconfont iconcalendar"></i>November 05, 2020</span
         class="post-info-item">
       
-      <span class="post-info-item"><i class="iconfont iconfont-size"></i>3</span>
+      <span class="post-info-item"><i class="iconfont iconfont-size"></i>1517</span>
     </div>
   </div>
 </section>
     <section class="main">
       <section class="content">
-        <h1 id="dfs"><a href="#dfs" class="headerlink" title="dfs"></a>dfs</h1>
+        <p>1.view_source<br>查看网页源代码有三种方法：  </p>
+<ol>
+<li>最常见也最直接的办法：按F12打开开发者工具</li>
+<li>题目也给了提示，在url前加view-source:url即可查看网页源代码，但这是早期的协议，现在只有谷歌和火狐支持，IE不支持  </li>
+<li>使用python中requests库的requests.get()<img   class="lazyload" data-original="1.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" >  </li>
+</ol>
+<p>2.robots<br>根据题目提示，访问该网页的robots协议<img   class="lazyload" data-original="2.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" ><br>再根据网页返回提示访问<code>f1ag_1s_h3re.php</code>即可得flag  </p>
+<p>3.backup<br>你知道index.php的备份文件名吗？<br>常见的备份文件扩展名有： .git .svn .swp .~ .bak<br>两种方法<br>第一种：一个个试，结果发现在地址栏输入<code>http://220.249.52.133:30247/index.php.bak</code>时会下载index.php.bak文件，用记事本打开即得flag<br>第二种，使用disearch命令<br>disearch下载命令：<br><code>git clone https://github.com/maurosoria/dirsearch</code>  </p>
+<p>进入disearch目录并运行：<br><code>cd disearch</code><br><code>python3 dirsearch.py -u &quot;http://220.249.52.133:33501/&quot; -e *</code><br><img   class="lazyload" data-original="4.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" ><br>可以看到有bak备份文件，于是可以确定index.php.bak是我们要找到，直接在地址栏输入<code>http://220.249.52.133:30247/index.php.bak</code>即可下载获得flag  </p>
+<p>4.cookie<br>直接F12打开开发者工具，看network，发现：<br><img   class="lazyload" data-original="5.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" ><br>根据提示查看cookie.php<br><img   class="lazyload" data-original="6.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" >  </p>
+<p>5.disabled_button<br>F12查看源码<img   class="lazyload" data-original="7.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" ><br>发现disabled属性，<code>disabled</code>禁用input，使得按钮失效，删除即可摁下按钮得到flag<img   class="lazyload" data-original="8.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" >   </p>
+<p>6.weak_auth<br>题目提示是弱口令，源码提示需要一本字典，且登陆后提示用户名为admin<br><img   class="lazyload" data-original="9.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" ><br>用burp+弱口令字典跑出密码123456<img   class="lazyload" data-original="10.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" ><br>登陆即得flag  </p>
+<p>7.simple_php  </p>
+<pre><code>&lt;?php
+show_source(__FILE__);
+include(&quot;config.php&quot;);        
+$a=@$_GET[&#39;a&#39;];                
+$b=@$_GET[&#39;b&#39;];
+if($a==0 and $a)&#123;        //当a的值为0而a不为0时
+    echo $flag1;
+&#125;
+if(is_numeric($b))&#123;        //b是数字
+    exit();
+&#125;
+if($b&gt;1234)&#123;            //b要＞1234
+    echo $flag2;
+&#125;
+?&gt;</code></pre>
+<p>php中==是值相等，===是严格相等（即值和类型都相等），这里要求a的值为0而a不为0，因此可以让a=0c（只要数字零后面接的是字母即可），则在判断==时会自动将a的类型转化为第一个字符的类型，在对值进行比较。<code>is_numeric</code>判断是否是数字，如果是则返回1，不是返回0，看代码我们知道，我们要让<code>is_numeric($b)</code>的值为0，否则程序会退出，且要求b的值大于1234，因此也是用数字+字母构造b。最终得出如下url：<br><code>http://220.249.52.133:59753/?a=0c&amp;&amp;b=1235c</code><br><img   class="lazyload" data-original="11.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" >  </p>
+<p>8.get_post<br>利用firefox的hackbar工具<br><img   class="lazyload" data-original="12.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" ><br><img   class="lazyload" data-original="13.png" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" ></p>
+
       </section>
       <section class="extra">
         
         <ul class="copyright">
   
   <li><strong>本文作者：</strong>tremiy</li>
-  <li><strong>本文链接：</strong><a href="https://tremiy.github.io/2020/10/24/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2%E6%96%87%E7%AB%A0/index.html">https://tremiy.github.io/2020/10/24/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2%E6%96%87%E7%AB%A0/index.html</a></li>
+  <li><strong>本文链接：</strong><a href="https://tremiy.github.io/2020/11/05/%E6%96%B0%E6%89%8B/xctf.%E6%96%B0%E6%89%8B/index.html">https://tremiy.github.io/2020/11/05/%E6%96%B0%E6%89%8B/xctf.%E6%96%B0%E6%89%8B/index.html</a></li>
   <li><strong>版权声明：</strong>本博客所有文章均采用<a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh"
       rel="external nofollow" target="_blank"> BY-NC-SA </a>许可协议，转载请注明出处！</li>
   
@@ -203,10 +222,8 @@
         
 <nav class="nav">
   
-    <a href="/2020/11/05/%E6%96%B0%E6%89%8B/xctf.%E6%96%B0%E6%89%8B/"><i class="iconfont iconleft"></i></a>
   
-  
-    <a href="/2020/10/24/hello-world/">Hello World<i class="iconfont iconright"></i></a>
+    <a href="/2020/10/24/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2%E6%96%87%E7%AB%A0/">我的第一篇博客文章<i class="iconfont iconright"></i></a>
   
 </nav>
 
