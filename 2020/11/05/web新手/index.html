@@ -169,7 +169,7 @@
       <span class="post-info-item"><i class="iconfont iconcalendar"></i>November 05, 2020</span
         class="post-info-item">
       
-      <span class="post-info-item"><i class="iconfont iconfont-size"></i>2115</span>
+      <span class="post-info-item"><i class="iconfont iconfont-size"></i>2068</span>
     </div>
   </div>
 </section>
@@ -179,7 +179,7 @@
 <ol>
 <li>最常见也最直接的办法：按F12打开开发者工具</li>
 <li>题目也给了提示，在url前加view-source:url即可查看网页源代码，但这是早期的协议，现在只有谷歌和火狐支持，IE不支持  </li>
-<li>使用python中requests库的requests.get()![](D:\1 CTF\New_blog\source_posts\web新手\1.jpg)  </li>
+<li>使用python中requests库的requests.get()<img   class="lazyload" data-original="/2020/11/05/web%E6%96%B0%E6%89%8B/1.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" >  </li>
 </ol>
 <h3 id="2-robots"><a href="#2-robots" class="headerlink" title="2.robots"></a>2.robots</h3><p>根据题目提示，访问该网页的robots协议![2](D:\1 CTF\New_blog\source_posts\web新手\2.jpg)<br>再根据网页返回提示访问<code>f1ag_1s_h3re.php</code>即可得flag  </p>
 <h3 id="3-backup"><a href="#3-backup" class="headerlink" title="3.backup"></a>3.backup</h3><p>你知道index.php的备份文件名吗？<br>常见的备份文件扩展名有： .git .svn .swp .~ .bak<br>两种方法<br>第一种：一个个试，结果发现在地址栏输入<code>http://220.249.52.133:30247/index.php.bak</code>时会下载index.php.bak文件，用记事本打开即得flag<br>第二种，使用disearch命令<br>disearch下载命令：<br><code>git clone https://github.com/maurosoria/dirsearch</code>  </p>
