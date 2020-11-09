@@ -73,8 +73,8 @@
       },
       donate: {
         enable: true,
-        alipay: '',
-        wechat: ''
+        alipay: 'http://m.qpic.cn/psc?/353c1c47-e34f-487c-ba46-f22a11c34637/bqQfVz5yrrGYSXMvKr.cqXia.HpduwjnheqLLWHEi0vYQYrmqYW06kNMpsBEoXky9OHkhHnF397vfUvhJNdZRDQEopKH.S1eTwWNCZ1vhrU!/b&amp;bo=agJ2AgAAAAABBzw!&amp;rf=viewer_4',
+        wechat: 'http://m.qpic.cn/psc?/353c1c47-e34f-487c-ba46-f22a11c34637/TmEUgtj9EK6.7V8ajmQrEDlNXTMD6lfSXCYca5eYjEuDaPxbjH3qUR12slxuml2zMsVYJ1iLu6O5MIMMSc9732uNEP4JMuVXgdOk0J6NsTE!/b&amp;bo=5gHxAQAAAAABFyc!&amp;rf=viewer_4'
       },
       motto: {
         api: '',
@@ -179,14 +179,14 @@
 <ol>
 <li>最常见也最直接的办法：按F12打开开发者工具</li>
 <li>题目也给了提示，在url前加view-source:url即可查看网页源代码，但这是早期的协议，现在只有谷歌和火狐支持，IE不支持  </li>
-<li>使用python中requests库的requests.get()<img   class="lazyload" data-original="1.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  alt="1">  </li>
+<li>使用python中requests库的requests.get()<img   class="lazyload" data-original="/.io//1.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  alt="1">  </li>
 </ol>
-<p>2.robots<br>根据题目提示，访问该网页的robots协议<img   class="lazyload" data-original="2.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  alt="2"><br>再根据网页返回提示访问<code>f1ag_1s_h3re.php</code>即可得flag  </p>
+<p>2.robots<br>根据题目提示，访问该网页的robots协议<img   class="lazyload" data-original="/.io//2.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  alt="2"><br>再根据网页返回提示访问<code>f1ag_1s_h3re.php</code>即可得flag  </p>
 <p>3.backup<br>你知道index.php的备份文件名吗？<br>常见的备份文件扩展名有： .git .svn .swp .~ .bak<br>两种方法<br>第一种：一个个试，结果发现在地址栏输入<code>http://220.249.52.133:30247/index.php.bak</code>时会下载index.php.bak文件，用记事本打开即得flag<br>第二种，使用disearch命令<br>disearch下载命令：<br><code>git clone https://github.com/maurosoria/dirsearch</code>  </p>
-<p>进入disearch目录并运行：<br><code>cd disearch</code><br><code>python3 dirsearch.py -u &quot;http://220.249.52.133:33501/&quot; -e *</code><br><img   class="lazyload" data-original="4.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  alt="4"><br>可以看到有bak备份文件，于是可以确定index.php.bak是我们要找到，直接在地址栏输入<code>http://220.249.52.133:30247/index.php.bak</code>即可下载获得flag  </p>
-<p>4.cookie<br>直接F12打开开发者工具，看network，发现：<br><img   class="lazyload" data-original="5.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  alt="5"><br>根据提示查看cookie.php<br><img   class="lazyload" data-original="6.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  alt="6">  </p>
-<p>5.disabled_button<br>F12查看源码<img   class="lazyload" data-original="7.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  alt="7"><br>发现disabled属性，<code>disabled</code>禁用input，使得按钮失效，删除即可摁下按钮得到flag<img   class="lazyload" data-original="8.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  alt="8">   </p>
-<p>6.weak_auth<br>题目提示是弱口令，源码提示需要一本字典，且登陆后提示用户名为admin<br><img   class="lazyload" data-original="9.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  alt="9"><br>用burp+弱口令字典跑出密码123456<img   class="lazyload" data-original="10.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  alt="10"><br>登陆即得flag  </p>
+<p>进入disearch目录并运行：<br><code>cd disearch</code><br><code>python3 dirsearch.py -u &quot;http://220.249.52.133:33501/&quot; -e *</code><br><img   class="lazyload" data-original="/.io//4.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  alt="4"><br>可以看到有bak备份文件，于是可以确定index.php.bak是我们要找到，直接在地址栏输入<code>http://220.249.52.133:30247/index.php.bak</code>即可下载获得flag  </p>
+<p>4.cookie<br>直接F12打开开发者工具，看network，发现：<br><img   class="lazyload" data-original="/.io//5.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  alt="5"><br>根据提示查看cookie.php<br><img   class="lazyload" data-original="/.io//6.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  alt="6">  </p>
+<p>5.disabled_button<br>F12查看源码<img   class="lazyload" data-original="/.io//7.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  alt="7"><br>发现disabled属性，<code>disabled</code>禁用input，使得按钮失效，删除即可摁下按钮得到flag<img   class="lazyload" data-original="/.io//8.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  alt="8">   </p>
+<p>6.weak_auth<br>题目提示是弱口令，源码提示需要一本字典，且登陆后提示用户名为admin<br><img   class="lazyload" data-original="/.io//9.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  alt="9"><br>用burp+弱口令字典跑出密码123456<img   class="lazyload" data-original="/.io//10.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  alt="10"><br>登陆即得flag  </p>
 <p>7.simple_php  </p>
 <pre><code>&lt;?php
 show_source(__FILE__);
@@ -203,8 +203,8 @@ if($b&gt;1234)&#123;            //b要＞1234
     echo $flag2;
 &#125;
 ?&gt;</code></pre>
-<p>php中==是值相等，===是严格相等（即值和类型都相等），这里要求a的值为0而a不为0，因此可以让a=0c（只要数字零后面接的是字母即可），则在判断==时会自动将a的类型转化为第一个字符的类型，在对值进行比较。<code>is_numeric</code>判断是否是数字，如果是则返回1，不是返回0，看代码我们知道，我们要让<code>is_numeric($b)</code>的值为0，否则程序会退出，且要求b的值大于1234，因此也是用数字+字母构造b。最终得出如下url：<br><code>http://220.249.52.133:59753/?a=0c&amp;&amp;b=1235c</code><br><img   class="lazyload" data-original="11.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  alt="11">  </p>
-<p>8.get_post<br>利用firefox的hackbar工具<br><img   class="lazyload" data-original="12.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  alt="12"><br><img   class="lazyload" data-original="13.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  alt="13"></p>
+<p>php中==是值相等，===是严格相等（即值和类型都相等），这里要求a的值为0而a不为0，因此可以让a=0c（只要数字零后面接的是字母即可），则在判断==时会自动将a的类型转化为第一个字符的类型，在对值进行比较。<code>is_numeric</code>判断是否是数字，如果是则返回1，不是返回0，看代码我们知道，我们要让<code>is_numeric($b)</code>的值为0，否则程序会退出，且要求b的值大于1234，因此也是用数字+字母构造b。最终得出如下url：<br><code>http://220.249.52.133:59753/?a=0c&amp;&amp;b=1235c</code><br><img   class="lazyload" data-original="/.io//11.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  alt="11">  </p>
+<p>8.get_post<br>利用firefox的hackbar工具<br><img   class="lazyload" data-original="/.io//12.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  alt="12"><br><img   class="lazyload" data-original="/.io//13.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  alt="13"></p>
 
       </section>
       <section class="extra">
@@ -221,7 +221,7 @@ if($b&gt;1234)&#123;            //b要＞1234
         
         <section class="donate">
   <div class="qrcode">
-    <img src="">
+    <img   class="lazyload" data-original="http://m.qpic.cn/psc?/353c1c47-e34f-487c-ba46-f22a11c34637/bqQfVz5yrrGYSXMvKr.cqXia.HpduwjnheqLLWHEi0vYQYrmqYW06kNMpsBEoXky9OHkhHnF397vfUvhJNdZRDQEopKH.S1eTwWNCZ1vhrU!/b&bo=agJ2AgAAAAABBzw!&rf=viewer_4" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" >
   </div>
   <div class="icon">
     <a href="javascript:;" id="alipay"><i class="iconfont iconalipay"></i></a>
