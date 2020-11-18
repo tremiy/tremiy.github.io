@@ -169,7 +169,7 @@
       <span class="post-info-item"><i class="iconfont iconcalendar"></i>November 09, 2020</span
         class="post-info-item">
       
-      <span class="post-info-item"><i class="iconfont iconfont-size"></i>1644</span>
+      <span class="post-info-item"><i class="iconfont iconfont-size"></i>1948</span>
     </div>
   </div>
 </section>
@@ -238,6 +238,30 @@
 </li>
 </ol>
 <p><img   class="lazyload" data-original="/2020/11/09/sqlilabs/14.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" ></p>
+<h2 id="GET-基于双注入的SQL注入发现"><a href="#GET-基于双注入的SQL注入发现" class="headerlink" title="GET 基于双注入的SQL注入发现"></a>GET 基于双注入的SQL注入发现</h2><p>在做题之前，先来了解几个概念：</p>
+<p><strong>SQL中常见的聚合函数：</strong></p>
+<ol>
+<li><p><code>count()</code>：记录个数/项目数/记录数等</p>
+</li>
+<li><p><code>avg()</code>：求某一列的平均数（若有Null会忽略其值，如果需要看成零，则用<code>IsNull()</code>来转换</p>
+</li>
+<li><p><code>sum()</code>：求和</p>
+</li>
+<li><p><code>max()</code>：求最大值</p>
+</li>
+<li><p><code>min()</code>：求最小值  </p>
+<p>关于<code>group by</code>函数和聚合函数的理解可以看看这篇文章：<a target="_blank" rel="noopener" href="https://blog.csdn.net/shaofei63/article/details/42800793?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromBaidu-1.control&depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromBaidu-1.control"></a></p>
+</li>
+</ol>
+<p>双注入查询需要理解的几个函数：</p>
+<ol>
+<li><code>rand()</code>：随机函数</li>
+<li><code>floor()</code>：取整函数</li>
+<li><code>count()</code>：汇总函数</li>
+<li><code>group by</code>：分组语句</li>
+</ol>
+<p>安装好mysql后输入<code>mysql -u root -p</code>进入mysql命令行</p>
+<h3 id="less-5："><a href="#less-5：" class="headerlink" title="less-5："></a>less-5：</h3><p>在</p>
 
       </section>
       <section class="extra">
