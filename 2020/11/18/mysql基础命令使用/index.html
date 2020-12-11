@@ -7,13 +7,14 @@
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>杨咩咩</title>
+  <title>mysql基础命令使用 - 杨咩咩</title>
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="google" content="notranslate" />
 
   
   
+  <meta name="description" content="1. 在win下进入mysqlmysql -u roo..."> 
   
   <meta name="author" content="tremiy"> 
 
@@ -62,7 +63,7 @@
     var CONFIG = window.CONFIG || {};
     var ZHAOO = window.ZHAOO || {};
     CONFIG = {
-      isHome: true,
+      isHome: false,
       fancybox: true,
       pjax: false,
       lazyload: {
@@ -103,6 +104,17 @@
   <div class="loading"></div>
   
 
+
+<nav class="navbar">
+  <div class="left"></div>
+  <div class="center">mysql基础命令使用</div>
+  <div class="right">
+    
+      <i class="iconfont iconmoono" id="color-toggle" color-toggle="light"></i>
+    
+    <i class="iconfont iconmenu j-navbar-menu"></i>
+  </div>
+</nav>
 
   <nav class="menu">
   <div class="menu-wrap">
@@ -146,148 +158,91 @@
   </div>
 </nav>
   <main id="main">
-  
-    <div class="preview">
-  <nav class="navbar j-navbar-menu">
-    <i class="iconfont iconmenu"></i>
-  </nav>
-  <div class="preview-image">
-    <h2 class="preview-motto" id="motto"></h2>
-    <!-- <span class="preview-cursor">|</span> -->
-    
-    <div class="preview-overlay">
-      <svg class="preview-waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-        viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
-        <defs>
-          <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
-        </defs>
-        <g class="preview-parallax">
-          <use xlink:href="#gentle-wave" x="48" y="0" fill="rgba(var(--color-background-rgb), 0.7" />
-          <use xlink:href="#gentle-wave" x="48" y="3" fill="rgba(var(--color-background-rgb), 0.5)" />
-          <use xlink:href="#gentle-wave" x="48" y="5" fill="rgba(var(--color-background-rgb), 0.3)" />
-          <use xlink:href="#gentle-wave" x="48" y="7" fill="rgb(var(--color-background-rgb))" />
-        </g>
-      </svg>
-    </div>
-    
-  </div>
-  <div class="preview-scroll">
-    <a href="#container" class="smooth-scroll"><i class="iconfont iconMouse"></i></a>
-  </div>
-</div>
-  
   <div class="container" id="container">
-    <section class="row post">
-  
-  <div class="col-lg-4 col-md-6 col-sm-12 post-item">
-  <div class="post-wrap">
-    
-    <a href="/2020/12/07/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB/" class="post-image">
-      <img   class="lazyload" data-original="/images/theme/post-image.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  draggable="false">
-    </a>
-    <div class="post-content">
-      <h3 class="post-title"><a href="/2020/12/07/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB/">文件包含</a></h3>
+    <article class="article">
+  <div class="wrap">
+    <section class="head">
+  <img   class="lazyload" data-original="/images/theme/post-image.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  draggable="false">
+  <div class="head-mask">
+    <h1 class="head-title">mysql基础命令使用</h1>
+    <div class="head-info">
+      <span class="post-info-item"><i class="iconfont iconcalendar"></i>November 18, 2020</span
+        class="post-info-item">
       
-      
-      
-      <div class="post-excerpt">
-        <p class="substr-3">文件包含：在一个PHP脚本中，去将另外一个文件（PHP）包含进来，去合作完成一件事情。
-作用：
-要么使用被包含文件中的内容，实现代码的共享（重用）：向上包含（索要）
+      <span class="post-info-item"><i class="iconfont iconfont-size"></i>887</span>
+    </div>
+  </div>
+</section>
+    <section class="main">
+      <section class="content">
+        <h3 id="1-在win下进入mysql"><a href="#1-在win下进入mysql" class="headerlink" title="1. 在win下进入mysql"></a>1. 在win下进入mysql</h3><p><code>mysql -u root -p</code></p>
+<p>再输入密码即可进入（前提是已经安装了mysql并且配置了相关的环境）</p>
+<h3 id="2-语句"><a href="#2-语句" class="headerlink" title="2.语句"></a>2.语句</h3><p>mysql中都以分号；结尾，如果没有输入分号就不会结束语句，可以多行输入后再输入分号结束一条语句</p>
+<h3 id="3-查看所有数据库"><a href="#3-查看所有数据库" class="headerlink" title="3.查看所有数据库"></a>3.查看所有数据库</h3><p><code>show databases;</code></p>
+<h3 id="4-创建数据库"><a href="#4-创建数据库" class="headerlink" title="4. 创建数据库"></a>4. 创建数据库</h3><p><code>create database database_name</code></p>
+<p>如：<code>create database test</code></p>
+<h3 id="4-进入数据库"><a href="#4-进入数据库" class="headerlink" title="4.进入数据库"></a>4.进入数据库</h3><p><code>use database_name</code></p>
+<p>如：<code>use test</code>即可进入数据库test</p>
+<h3 id="5-创建表"><a href="#5-创建表" class="headerlink" title="5. 创建表"></a>5. 创建表</h3><p><code>create table table_name (列名1 属性1，...，列名n 属性n);</code></p>
+<p>如：<code>create table tabletest (name varchar(20),sex char(1),birth date);</code></p>
+<h3 id="6-查看当前数据库的所有表"><a href="#6-查看当前数据库的所有表" class="headerlink" title="6. 查看当前数据库的所有表"></a>6. 查看当前数据库的所有表</h3><p><code>show tables;</code></p>
+<h3 id="7-查看表的结构"><a href="#7-查看表的结构" class="headerlink" title="7. 查看表的结构"></a>7. 查看表的结构</h3><p><code>describe table_name;</code></p>
+<h3 id="8-查看表的所有内容"><a href="#8-查看表的所有内容" class="headerlink" title="8. 查看表的所有内容"></a>8. 查看表的所有内容</h3><p><code>select * from table_name;</code></p>
+<h3 id="9-往表中插入数据"><a href="#9-往表中插入数据" class="headerlink" title="9. 往表中插入数据"></a>9. 往表中插入数据</h3><p><code>insert into table_name (列名1，...，列名k) values(值1，...，值k);</code></p>
+<p>如：<code>insert into tabletest (name,sex,birth) values(&quot;zhangsan&quot;,&quot;m&quot;,20000101);</code></p>
+<p>注意，插入的值如果是字符一定要加双引号</p>
+<h3 id="10-增加列"><a href="#10-增加列" class="headerlink" title="10. 增加列"></a>10. 增加列</h3><p><code>alter table tabletest add column single char(1)</code>;</p>
+<h3 id="11-更新值"><a href="#11-更新值" class="headerlink" title="11. 更新值"></a>11. 更新值</h3><p><code>update tabletest set single=&#39;y&#39; where name=&quot;zhangsan&quot;;</code></p>
+<h3 id="12-删除行"><a href="#12-删除行" class="headerlink" title="12. 删除行"></a>12. 删除行</h3><p><code>delete from tabletest where name=&quot;zhangsan&quot;;</code></p>
+<h3 id="13-删除表"><a href="#13-删除表" class="headerlink" title="13. 删除表"></a>13. 删除表</h3><p><code>drop table table_name;</code></p>
+<h3 id="14-退出"><a href="#14-退出" class="headerlink" title="14. 退出"></a>14. 退出</h3><p><code>quit</code></p>
 
-向上包含：在当前脚本要用某...</p>
-      </div>
-      <div class="post-info">
-        <span class="post-info-item"><i class="iconfont iconcalendar"></i>December 07, 2020</span
-          class="post-info-item">
+      </section>
+      <section class="extra">
         
-        <span class="post-info-item"><i class="iconfont iconfont-size"></i>1174</span>
-      </div>
-    </div>
-  </div>
-</div>
+        <ul class="copyright">
   
-  <div class="col-lg-4 col-md-6 col-sm-12 post-item">
-  <div class="post-wrap">
-    
-    <a href="/2020/11/18/mysql%E5%9F%BA%E7%A1%80%E5%91%BD%E4%BB%A4%E4%BD%BF%E7%94%A8/" class="post-image">
-      <img   class="lazyload" data-original="/images/theme/post-image.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  draggable="false">
-    </a>
-    <div class="post-content">
-      <h3 class="post-title"><a href="/2020/11/18/mysql%E5%9F%BA%E7%A1%80%E5%91%BD%E4%BB%A4%E4%BD%BF%E7%94%A8/">mysql基础命令使用</a></h3>
-      
-      
-      
-      <div class="post-excerpt">
-        <p class="substr-3">1. 在win下进入mysqlmysql -u root -p
-再输入密码即可进入（前提是已经安装了mysql并且配置了相关的环境）
-2.语句mysql中都以分号；结尾，如果没有输入分号就不会结...</p>
-      </div>
-      <div class="post-info">
-        <span class="post-info-item"><i class="iconfont iconcalendar"></i>November 18, 2020</span
-          class="post-info-item">
+  <li><strong>本文作者：</strong>tremiy</li>
+  <li><strong>本文链接：</strong><a href="https://tremiy.github.io/2020/11/18/mysql%E5%9F%BA%E7%A1%80%E5%91%BD%E4%BB%A4%E4%BD%BF%E7%94%A8/index.html">https://tremiy.github.io/2020/11/18/mysql%E5%9F%BA%E7%A1%80%E5%91%BD%E4%BB%A4%E4%BD%BF%E7%94%A8/index.html</a></li>
+  <li><strong>版权声明：</strong>本博客所有文章均采用<a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh"
+      rel="external nofollow" target="_blank"> BY-NC-SA </a>许可协议，转载请注明出处！</li>
+  
+</ul>
         
-        <span class="post-info-item"><i class="iconfont iconfont-size"></i>887</span>
-      </div>
-    </div>
-  </div>
-</div>
-  
-  <div class="col-lg-4 col-md-6 col-sm-12 post-item">
-  <div class="post-wrap">
-    
-    <a href="/2020/11/09/sqlilabs/" class="post-image">
-      <img   class="lazyload" data-original="/images/theme/post-image.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  draggable="false">
-    </a>
-    <div class="post-content">
-      <h3 class="post-title"><a href="/2020/11/09/sqlilabs/">sqlilabs  --持续更新</a></h3>
-      
-      
-      
-      <div class="post-excerpt">
-        <p class="substr-3">sqli-labs    –持续更新SQL注入漏洞形成的原因是用户输入的数据被SQL解释器执行常见的SQL注入类型包括：数字型和字符型。（还有更详细的划分，但大体上就分为这两个）下面开始以sql...</p>
-      </div>
-      <div class="post-info">
-        <span class="post-info-item"><i class="iconfont iconcalendar"></i>November 09, 2020</span
-          class="post-info-item">
         
-        <span class="post-info-item"><i class="iconfont iconfont-size"></i>5085</span>
-      </div>
-    </div>
+        <section class="donate">
+  <div class="qrcode">
+    <img   class="lazyload" data-original="https://imgchr.com/i/BHcc6A" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" >
   </div>
-</div>
+  <div class="icon">
+    <a href="javascript:;" id="alipay"><i class="iconfont iconalipay"></i></a>
+    <a href="javascript:;" id="wechat"><i class="iconfont iconwechat-fill"></i></a>
+  </div>
+</section>
+        
+        
+        
+<nav class="nav">
   
-  <div class="col-lg-4 col-md-6 col-sm-12 post-item">
-  <div class="post-wrap">
-    
-    <a href="/2020/11/05/web%E6%96%B0%E6%89%8B/" class="post-image">
-      <img   class="lazyload" data-original="/images/theme/post-image.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  draggable="false">
-    </a>
-    <div class="post-content">
-      <h3 class="post-title"><a href="/2020/11/05/web%E6%96%B0%E6%89%8B/">攻防世界 web新手区</a></h3>
-      
-      
-      
-      <div class="post-excerpt">
-        <p class="substr-3">1.view_source查看网页源代码有三种方法：  
+    <a href="/2020/12/07/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB/"><i class="iconfont iconleft"></i>文件包含</a>
+  
+  
+    <a href="/2020/11/09/sqlilabs/">sqlilabs  --持续更新<i class="iconfont iconright"></i></a>
+  
+</nav>
 
-最常见也最直接的办法：按F12打开开发者工具
-题目也给了提示，在url前加view-source:url即可查看网页源代码，但这是早期...</p>
-      </div>
-      <div class="post-info">
-        <span class="post-info-item"><i class="iconfont iconcalendar"></i>November 05, 2020</span
-          class="post-info-item">
-        
-        <span class="post-info-item"><i class="iconfont iconfont-size"></i>1532</span>
-      </div>
-    </div>
-  </div>
-</div>
+      </section>
+      
+      <section class="comments">
+  
+  <div class="btn" id="comments-btn">查看评论</div>
+  
   
 </section>
-    <section class="paginator">
-  
-</section>
+      
+    </section>
+  </div>
+</article>
   </div>
 </main>
   <footer class="footer">
