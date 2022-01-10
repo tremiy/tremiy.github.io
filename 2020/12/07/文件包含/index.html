@@ -1,0 +1,437 @@
+
+
+<!DOCTYPE html>
+<html lang="en" color-mode=light>
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>文件包含 - tremiy</title>
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="google" content="notranslate" />
+
+  
+  
+  <meta name="description" content="文件包含：在一个PHP脚本中，去将另外一个文件（PHP..."> 
+  
+  <meta name="author" content="tremiy"> 
+
+  
+    <link rel="icon" href="/images/icons/favicon-16x16.png" type="image/png" sizes="16x16">
+  
+  
+    <link rel="icon" href="/images/icons/favicon-32x32.png" type="image/png" sizes="32x32">
+  
+  
+    <link rel="apple-touch-icon" href="/images/icons/apple-touch-icon.png" sizes="180x180">
+  
+  
+    <meta rel="mask-icon" href="/images/icons/stun-logo.svg" color="#333333">
+  
+  
+    <meta rel="msapplication-TileImage" content="/images/icons/favicon-144x144.png">
+    <meta rel="msapplication-TileColor" content="#000000">
+  
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+
+  
+  
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1445822_onl0g0h21np.css">
+
+  
+
+  
+  
+  
+<link rel="stylesheet" href="https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.min.css">
+
+  
+
+  
+  
+  
+<link rel="stylesheet" href="https://cdn.bootcss.com/highlight.js/9.18.1/styles/xcode.min.css">
+
+  
+
+  <script>
+    var CONFIG = window.CONFIG || {};
+    var ZHAOO = window.ZHAOO || {};
+    CONFIG = {
+      isHome: false,
+      fancybox: true,
+      pjax: false,
+      lazyload: {
+        enable: true,
+        onlyPost: 'false',
+        loading: '/images/theme/loading.gif'
+      },
+      donate: {
+        enable: true,
+        alipay: 'https://imgchr.com/i/BHcc6A',
+        wechat: 'https://imgchr.com/i/BHctyR'
+      },
+      motto: {
+        api: '',
+        default: '叫你你敢答应吗'
+      },
+      galleries: {
+        enable: true
+      },
+      fab: {
+        enable: true,
+        alwaysShow: false
+      },
+      carrier: {
+        enable: true
+      },
+      daovoice: {
+        enable: true
+      }
+    }
+  </script>
+
+  
+
+  
+<meta name="generator" content="Hexo 5.2.0"></head>
+<body class="lock-screen">
+  <div class="loading"></div>
+  
+
+
+<nav class="navbar">
+  <div class="left"></div>
+  <div class="center">文件包含</div>
+  <div class="right">
+    
+      <i class="iconfont iconmoono" id="color-toggle" color-toggle="light"></i>
+    
+    <i class="iconfont iconmenu j-navbar-menu"></i>
+  </div>
+</nav>
+
+  <nav class="menu">
+  <div class="menu-wrap">
+    <div class="menu-close">
+      <i class="iconfont iconbaseline-close-px"></i>
+    </div>
+    <ul class="menu-content">
+      
+      
+      
+      
+      <li class="menu-item"><a href="/ " class="underline"> 首页</a></li>
+      
+      
+      
+      
+      <li class="menu-item"><a href="/galleries " class="underline"> 课设</a></li>
+      
+      
+      
+      
+      <li class="menu-item"><a href="/archives " class="underline"> 课外</a></li>
+      
+      
+      
+      
+      <li class="menu-item"><a href="/tags " class="underline"> 工具</a></li>
+      
+      
+      
+      
+      <li class="menu-item"><a href="/categories " class="underline"> 其他</a></li>
+      
+      
+      
+      
+      <li class="menu-item"><a href="/about " class="underline"> 待定</a></li>
+      
+    </ul>
+    <div class="menu-copyright"><p>Powered by <a target="_blank" href="https://hexo.io">Hexo</a>  |  Theme - <a target="_blank" href="https://github.com/izhaoo/hexo-theme-zhaoo">zhaoo</a></p></div>
+  </div>
+</nav>
+  <main id="main">
+  <div class="container" id="container">
+    <article class="article">
+  <div class="wrap">
+    <section class="head">
+  <img   class="lazyload" data-original="/images/theme/post-image.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  draggable="false">
+  <div class="head-mask">
+    <h1 class="head-title">文件包含</h1>
+    <div class="head-info">
+      <span class="post-info-item"><i class="iconfont iconcalendar"></i>December 07, 2020</span
+        class="post-info-item">
+      
+      <span class="post-info-item"><i class="iconfont iconfont-size"></i>1174</span>
+    </div>
+  </div>
+</section>
+    <section class="main">
+      <section class="content">
+        <h1 id="文件包含："><a href="#文件包含：" class="headerlink" title="文件包含："></a>文件包含：</h1><p>在一个PHP脚本中，去将另外一个文件（PHP）包含进来，去合作完成一件事情。</p>
+<h2 id="作用："><a href="#作用：" class="headerlink" title="作用："></a>作用：</h2><ol>
+<li><p>要么使用被包含文件中的内容，实现代码的共享（重用）：向上包含（索要）</p>
+<blockquote>
+<p>向上包含：在当前脚本要用某个代码之前包含别的文件</p>
+</blockquote>
+</li>
+<li><p>要么自己有东西可以给别的文件使用，实现代码的共享（重用）：向下包含</p>
+<blockquote>
+<p>向下包含：在自己有某个东西的时候，需要别的脚本来显示（自己代码写完之后包含其他文件）</p>
+</blockquote>
+</li>
+</ol>
+<p><strong>最大的作用</strong>：分工协作：每个脚本做的事情不一样，因此可以使用协作方式，让多个脚本共同完成一件事情</p>
+<h2 id="文件包含四种形式"><a href="#文件包含四种形式" class="headerlink" title="文件包含四种形式"></a>文件包含四种形式</h2><ol>
+<li><code>include</code>：包含文件</li>
+<li><code>include_once</code>：系统会自动判断文件包含过程中，是否已经包含过（一个文件最多被包含一次）</li>
+<li><code>require</code>：与<code>include</code>相同</li>
+<li><code>require_once</code>：与<code>include_once</code>相同</li>
+</ol>
+<p>包含基本语法：</p>
+<p><code>include&#39;文件名字&#39;;</code></p>
+<p><code>include(&#39;文件名字&#39;);    //文件名字：路径问题</code></p>
+<h2 id="文件加载"><a href="#文件加载" class="headerlink" title="文件加载"></a>文件加载</h2><p>PHP代码的执行流程：</p>
+<ol>
+<li>读取代码文件（PHP程序)</li>
+<li>编译：将PHP代码转换成字节码（生成opcode）</li>
+<li>zendengine 来解析opcode，按照字节码去进行逻辑运算</li>
+<li>转换成对应的HTML代码</li>
+</ol>
+<p>文件加载原理：</p>
+<ol>
+<li>在文件加载（<code>include</code>或者<code>require</code>）的时候，系统会自动的将被包含文件中的代码相当于嵌入到当前文件中</li>
+<li>加载位置：对应的文件中的代码嵌入的位置就是对应的<code>include</code>位置</li>
+<li>在php中被包含的文件是单独进行编译的</li>
+</ol>
+<p><em>PHP文件在编译的过程中如果出现了语法错误，那么会失败（不会执行）；但是如果被包含文件有错误的时候，系统会在执行到包含include这条语句的时候才会报错</em></p>
+<h2 id="include和require区别"><a href="#include和require区别" class="headerlink" title="include和require区别"></a><code>include</code>和<code>require</code>区别</h2><p><code>include</code>和<code>include_once</code>的区别：</p>
+<p><code>include</code>系统会碰到一次，执行一次；如果对同一个文件进行多次加载，那么系统会执行多次；</p>
+<p><code>include_once</code>系统碰到多次，也只会执行一次</p>
+<p><strong><code>include</code>和<code>require</code>区别</strong>：本质都是包含文件，唯一的区别在于包含不到文件的时候，报错的形式不一样。前者错误级别比较轻（不会阻止代码执行），后者要求较高，如果包含出错代码不在执行（require后面的代码）</p>
+<h2 id="文件加载路径"><a href="#文件加载路径" class="headerlink" title="文件加载路径"></a>文件加载路径</h2><p>文件在加载的时候需要指定文件路径才能保证PHP正确的找到对应的文件</p>
+<p>绝对路径与相对路径区别：</p>
+<ol>
+<li>绝对路径相对效率偏低，但是相对安全（路径不会出问题）</li>
+<li>相对路径相对效率高些，但是容易出错（相对路径会发生改变）</li>
+</ol>
+<h2 id="文件嵌套包含"><a href="#文件嵌套包含" class="headerlink" title="文件嵌套包含"></a>文件嵌套包含</h2><p>一个文件包含另外一个文件，同时被包含的文件又包含了另外一个文件</p>
+<p><em>嵌套包含的时候很容易出现相对路径出错的问题：相对路径会因为文件的包含而改变（./和../）：在win中，每一个文件夹下都有.和..的文件夹</em></p>
+
+      </section>
+      <section class="extra">
+        
+        <ul class="copyright">
+  
+  <li><strong>本文作者：</strong>tremiy</li>
+  <li><strong>本文链接：</strong><a href="https://tremiy.github.io/2020/12/07/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB/index.html">https://tremiy.github.io/2020/12/07/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB/index.html</a></li>
+  <li><strong>版权声明：</strong>本博客所有文章均采用<a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh"
+      rel="external nofollow" target="_blank"> BY-NC-SA </a>许可协议，转载请注明出处！</li>
+  
+</ul>
+        
+        
+        <section class="donate">
+  <div class="qrcode">
+    <img   class="lazyload" data-original="https://imgchr.com/i/BHcc6A" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" >
+  </div>
+  <div class="icon">
+    <a href="javascript:;" id="alipay"><i class="iconfont iconalipay"></i></a>
+    <a href="javascript:;" id="wechat"><i class="iconfont iconwechat-fill"></i></a>
+  </div>
+</section>
+        
+        
+        
+<nav class="nav">
+  
+    <a href="/2022/01/04/github%E4%BD%BF%E7%94%A8/"><i class="iconfont iconleft"></i></a>
+  
+  
+    <a href="/2020/11/18/mysql%E5%9F%BA%E7%A1%80%E5%91%BD%E4%BB%A4%E4%BD%BF%E7%94%A8/">mysql基础命令使用<i class="iconfont iconright"></i></a>
+  
+</nav>
+
+      </section>
+      
+      <section class="comments">
+  
+  <div class="btn" id="comments-btn">查看评论</div>
+  
+  
+</section>
+      
+    </section>
+  </div>
+</article>
+  </div>
+</main>
+  <footer class="footer">
+  <div class="footer-social">
+    
+    
+    
+    
+    
+    <a href="tencent://message/?Menu=yes&uin=894519210 " target="_blank" onMouseOver="this.style.color= '#12B7F5'"
+      onMouseOut="this.style.color='#33333D'">
+      <i class="iconfont footer-social-item  iconQQ "></i>
+    </a>
+    
+    
+    
+    
+    
+    <a href="javascript:; " target="_blank" onMouseOver="this.style.color= '#09BB07'"
+      onMouseOut="this.style.color='#33333D'">
+      <i class="iconfont footer-social-item  iconwechat-fill "></i>
+    </a>
+    
+    
+    
+    
+    
+    <a href="https://www.instagram.com/izhaoo/ " target="_blank" onMouseOver="this.style.color= '#DA2E76'"
+      onMouseOut="this.style.color='#33333D'">
+      <i class="iconfont footer-social-item  iconinstagram "></i>
+    </a>
+    
+    
+    
+    
+    
+    <a href="https://github.com/izhaoo " target="_blank" onMouseOver="this.style.color= '#24292E'"
+      onMouseOut="this.style.color='#33333D'">
+      <i class="iconfont footer-social-item  icongithub-fill "></i>
+    </a>
+    
+    
+    
+    
+    
+    <a href="mailto:izhaoo@163.com " target="_blank" onMouseOver="this.style.color='#FFBE5B'"
+      onMouseOut="this.style.color='#33333D'">
+      <i class="iconfont footer-social-item  iconmail"></i>
+    </a>
+    
+  </div>
+  <div class="footer-copyright"><p>Powered by <a target="_blank" href="https://hexo.io">Hexo</a>  |  Theme - <a target="_blank" href="https://github.com/izhaoo/hexo-theme-zhaoo">zhaoo</a></p></div>
+</footer>
+  
+      <div class="fab fab-plus">
+    <i class="iconfont iconplus"></i>
+  </div>
+  
+  <div class="fab fab-daovoice">
+    <i class="iconfont iconcomment"></i>
+  </div>
+  
+  <div class="fab fab-up">
+    <i class="iconfont iconcaret-up"></i>
+  </div>
+  
+  
+    
+<script src="/js/color-mode.js"></script>
+
+  
+</body>
+
+
+<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+
+
+
+
+
+
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery.lazyload/1.9.1/jquery.lazyload.min.js"></script>
+
+
+
+
+
+
+<script src="https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.min.js"></script>
+
+
+
+
+
+
+<script src="/js/utils.js"></script>
+<script src="/js/modules.js"></script>
+<script src="/js/zui.js"></script>
+<script src="/js/script.js"></script>
+
+
+
+
+
+<script>
+  (function (i, s, o, g, r, a, m) {
+    i["DaoVoiceObject"] = r;
+    i[r] = i[r] || function () {
+      (i[r].q = i[r].q || []).push(arguments)
+    }, i[r].l = 1 * new Date();
+    a = s.createElement(o), m = s.getElementsByTagName(o)[0];
+    a.async = 1;
+    a.src = g;
+    a.charset = "utf-8";
+    m.parentNode.insertBefore(a, m)
+  })(window, document, "script", ('https:' == document.location.protocol ? 'https:' : 'http:') +
+    "//widget.daovoice.io/widget/0f81ff2f.js", "daovoice")
+  daovoice('init', {
+    app_id: "abcdefg"
+  }, {
+    launcher: {
+      disableLauncherIcon: true,
+    },
+  });
+  daovoice('update');
+</script>
+
+
+
+<script>
+  (function () {
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+      bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    } else {
+      bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+  })();
+</script>
+
+
+<script>
+  var _hmt = _hmt || [];
+  (function () {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?4c204d8bc027a0455b5fc642ac334ca8";
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+
+
+
+
+
+
+
+
+
+
+</html>
