@@ -14,6 +14,8 @@
 
   
   
+  <meta name="description" content="一些爬虫
+说明：一共爬了三个网站，分别是豆瓣TOP25..."> 
   
   <meta name="author" content="tremiy"> 
 
@@ -168,13 +170,30 @@
       <span class="post-info-item"><i class="iconfont iconcalendar"></i>January 10, 2022</span
         class="post-info-item">
       
-      <span class="post-info-item"><i class="iconfont iconfont-size"></i>0</span>
+      <span class="post-info-item"><i class="iconfont iconfont-size"></i>506</span>
     </div>
   </div>
 </section>
     <section class="main">
       <section class="content">
-        
+        <h1 id="一些爬虫"><a href="#一些爬虫" class="headerlink" title="一些爬虫"></a>一些爬虫</h1><blockquote>
+<p>说明：一共爬了三个网站，分别是豆瓣TOP250、51job、xssed网站漏洞信息，其中爬取豆瓣时使用的方法是BeautifulSoup，有可视化分析，后两个使用的方法是xpath，无可视化</p>
+<p>环境：JetBrains PyCharm 2019.2.5 、 python 3.8.5 </p>
+</blockquote>
+<p>在说明具体过程之前，先了解一些需要用到的python模块：</p>
+<ul>
+<li><code>import sys</code>：提供对解释器使用或维护的一些变量的访问，以及与解释器强烈交互的函数</li>
+<li><code>from bs4 import BeautifulSoup</code>：页面解析，获取数据</li>
+<li><code>import re</code>：正则表达式，进行文字匹配</li>
+<li><code>import urllib.request</code>, <code>urllib.error</code>：指定URL，获取网页数据</li>
+<li><code>import xlwt</code>：进行excel操作</li>
+<li><code>import sqlite3</code>：进行SQLLi</li>
+<li><code>import json</code> ：一种轻量级的数据交换格式</li>
+<li><code>from lxml import etree</code>：用来解析XML字符串</li>
+</ul>
+<p><em>每次调用这些模块的时候都需要先引用，有一点抽象，等用到具体函数的时候再进一步解释</em></p>
+<h2 id="爬取豆瓣TOP250"><a href="#爬取豆瓣TOP250" class="headerlink" title="爬取豆瓣TOP250"></a>爬取豆瓣TOP250</h2><p>爬取网页需要分成三大步：</p>
+
       </section>
       <section class="extra">
         
