@@ -461,6 +461,9 @@
         <hr class="clearfix">
 
         
+        <!-- 是否加载使用自带的 prismjs. -->
+        <link rel="stylesheet" href="/libs/prism/prism.css">
+        
 
         
 
@@ -478,7 +481,21 @@
 <h3 id="4-cookie"><a href="#4-cookie" class="headerlink" title="4.cookie"></a>4.cookie</h3><p>直接F12打开开发者工具，看network，发现：<br><img src="/.io//5.jpg"><br>根据提示查看cookie.php<br><img src="/.io//6.jpg">  </p>
 <h3 id="5-disabled-button"><a href="#5-disabled-button" class="headerlink" title="5.disabled_button"></a>5.disabled_button</h3><p>F12查看源码<img src="/.io//7.jpg"><br>发现disabled属性，<code>disabled</code>禁用input，使得按钮失效，删除即可摁下按钮得到flag<img src="/.io//8.jpg">   </p>
 <h3 id="6-weak-auth"><a href="#6-weak-auth" class="headerlink" title="6.weak_auth"></a>6.weak_auth</h3><p>题目提示是弱口令，源码提示需要一本字典，且登陆后提示用户名为admin<br><img src="/.io//9.jpg"><br>用burp+弱口令字典跑出密码123456<img src="/.io//10.jpg"><br>登陆即得flag  </p>
-<h3 id="7-simple-php"><a href="#7-simple-php" class="headerlink" title="7.simple_php"></a>7.simple_php</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">show_source(__FILE__);</span><br><span class="line">include(&quot;config.php&quot;);		</span><br><span class="line">$a&#x3D;@$_GET[&#39;a&#39;];				</span><br><span class="line">$b&#x3D;@$_GET[&#39;b&#39;];</span><br><span class="line">if($a&#x3D;&#x3D;0 and $a)&#123;		&#x2F;&#x2F;当a的值为0而a不为0时</span><br><span class="line">    echo $flag1;</span><br><span class="line">&#125;</span><br><span class="line">if(is_numeric($b))&#123;		&#x2F;&#x2F;b是数字</span><br><span class="line">    exit();</span><br><span class="line">&#125;</span><br><span class="line">if($b&gt;1234)&#123;			&#x2F;&#x2F;b要＞1234</span><br><span class="line">    echo $flag2;</span><br><span class="line">&#125;</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="7-simple-php"><a href="#7-simple-php" class="headerlink" title="7.simple_php"></a>7.simple_php</h3><pre><code>&lt;?php
+show_source(__FILE__);
+include(&quot;config.php&quot;);        
+$a=@$_GET[&#39;a&#39;];                
+$b=@$_GET[&#39;b&#39;];
+if($a==0 and $a){        //当a的值为0而a不为0时
+    echo $flag1;
+}
+if(is_numeric($b)){        //b是数字
+    exit();
+}
+if($b&gt;1234){            //b要＞1234
+    echo $flag2;
+}
+?&gt;</code></pre>
 <p>php中==是值相等，===是严格相等（即值和类型都相等），这里要求a的值为0而a不为0，因此可以让a=0c（只要数字零后面接的是字母即可），则在判断==时会自动将a的类型转化为第一个字符的类型，在对值进行比较。<code>is_numeric</code>判断是否是数字，如果是则返回1，不是返回0，看代码我们知道，我们要让<code>is_numeric($b)</code>的值为0，否则程序会退出，且要求b的值大于1234，因此也是用数字+字母构造b。最终得出如下url：<br><code>http://220.249.52.133:59753/?a=0c&amp;&amp;b=1235c</code><br><img src="/.io//11.jpg">  </p>
 <h3 id="8-get-post"><a href="#8-get-post" class="headerlink" title="8.get_post"></a>8.get_post</h3><p>利用firefox的hackbar工具<br><img src="/.io//12.jpg"><br><img src="/.io//13.jpg"></p>
 

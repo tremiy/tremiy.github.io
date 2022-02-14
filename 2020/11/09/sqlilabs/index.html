@@ -459,6 +459,9 @@ GE">
         <hr class="clearfix">
 
         
+        <!-- 是否加载使用自带的 prismjs. -->
+        <link rel="stylesheet" href="/libs/prism/prism.css">
+        
 
         
 
@@ -587,8 +590,11 @@ GE">
 <p><img src="/.io//18.JPG"></p>
 <p>这里只能返回一列，因此通过改变<code>Limit 0,1</code>来遍历</p>
 <p><code>limit</code>用法：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">select * from tableName limit i,n</span><br><span class="line"># tableName：表名</span><br><span class="line"># i：为查询结果的索引值(默认从0开始)，当i&#x3D;0时可省略i</span><br><span class="line"># n：为查询结果返回的数量</span><br><span class="line"># i与n之间使用英文逗号&quot;,&quot;隔开</span><br></pre></td></tr></table></figure>
-
+<pre><code>select * from tableName limit i,n
+# tableName：表名
+# i：为查询结果的索引值(默认从0开始)，当i=0时可省略i
+# n：为查询结果返回的数量
+# i与n之间使用英文逗号&quot;,&quot;隔开</code></pre>
 <p><img src="/.io//19.JPG"></p>
 <ol start="3">
 <li>查询列名：</li>
